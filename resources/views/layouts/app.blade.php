@@ -83,7 +83,18 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+          @if (session('info'))
+          <div class="container">
+            <div class="row">
+              <div class="mx-auto">
+                <div class="alert alert-success">
+                  {{ session('info') }}
+                </div>
+              </div>     
+            </div>
+          </div>
+          @endif
+          @yield('content')
         </main>
     </div>
 </body>

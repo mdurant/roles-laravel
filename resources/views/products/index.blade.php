@@ -51,6 +51,7 @@
                             @endforeach
                         </tbody>
                    </table>
+                   {{ $products->render() }}
                 </div>
             </div>
         </div>

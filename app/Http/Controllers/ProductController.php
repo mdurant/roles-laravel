@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+
 use Illuminate\Http\Request;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -42,8 +43,8 @@ class ProductController extends Controller
         //
         $product = Product::create($request->all());
 
-        return redirect()->route('products.edit', $products->id)
-                ->with('info', 'Producto ingresado con éxito');
+        return redirect()->route('products.edit', $product->id)
+            ->with('info', 'Producto guardado con éxito');
     }
 
     /**
@@ -52,10 +53,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
         //
-        return view ('products.show', compact('product'));
+        $product = Product::find($id);
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -64,10 +66,12 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
         //
-        return view ('products.edit', compact('product'));
+        $product = Product::find($id);
+
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -77,13 +81,12 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
         //
-        $product->update($request->all());
-
-        return redirect()->route('products.edit', $products->id)
-                ->with('info', 'Producto actualizado con éxito');
+         $product = Product::update($request->all());
+        return redirect()->route('products.edit', $product->id)
+            ->with('info', 'Producto guardado con éxito');
     }
 
     /**
