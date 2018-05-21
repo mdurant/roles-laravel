@@ -64,3 +64,7 @@ Route::middleware(['auth'])->group(function () {
     ->middleware('permission:products.edit');
 
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
